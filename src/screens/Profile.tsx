@@ -6,8 +6,8 @@ const Profile = ({ navigation }) => {
   return (
     <SafeAreaView>
       <Text>Profile</Text>
-      <Button title="Home" onPress={() => { navigation.navigate('Home'); }} />
-    </SafeAreaView>);
+    </SafeAreaView>
+  );
 };
 
 export default Profile;
