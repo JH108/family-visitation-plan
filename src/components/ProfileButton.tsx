@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { Button, Avatar } from 'react-native-elements';
 import { useSelector } from "react-redux";
 
 const styles = StyleSheet.create({
@@ -10,12 +11,19 @@ const styles = StyleSheet.create({
   }
 });
 
-const ProfileButton = () => {
+const ProfileButton = ({ navigation }) => {
   const counter = useSelector(state => state.counterSlice);
 
   return (
     <View style={styles.centeredContainer}>
-      <Text>{counter}</Text>
+      {/* Photo by Joshua Fuller on Unsplash */}
+      <Avatar
+        size="small"
+        rounded
+        icon={{ name: 'user', type: 'font-awesome' }}
+        onPress={() => navigation.push("Profile")}
+        activeOpacity={0.7}
+      />
     </View>
   );
 };

@@ -1,14 +1,13 @@
 import React from 'react';
 import { Text, SafeAreaView } from "react-native";
-import { Button } from "react-native-elements";
 
 
-const Home = ({ navigation }) => {
+const DeaconsList = ({ navigation }) => {
   return (
     <SafeAreaView>
-      <Text>Home</Text>
+      <Text>Deacons List</Text>
     </SafeAreaView>
   );
 };
 
-export default Home;
+export default DeaconsList;
