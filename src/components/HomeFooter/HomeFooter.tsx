@@ -16,15 +16,15 @@ const Home = ({ navigation }) => {
 	return (
 		<Appbar style={styles.bottom}>
 			<Appbar.Action
-				icon="car"
+				icon="chart-timeline"
 				onPress={() => navigation.push('Visitation List')}
 			/>
 			<Appbar.Action
-				icon="assistant"
+				icon="account-details"
 				onPress={() => navigation.push('Deacons List')}
 			/>
 			<Appbar.Action
-				icon="bookmark"
+				icon="account-group"
 				onPress={() => navigation.push('Families List')}
 			/>
 		</Appbar>
