@@ -1139,10 +1139,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.5.tgz#25421be6cd943a4b1660b62cfbcd45be8891462c"
   integrity sha512-Lj1DzfCmW0f4HnmHtEuX8Yy2f7cnUA8r5KGGUuDDGtQt1so6QJkKeUmsnLo2zYDtsF8due6hvIL06Vdo5xxuLQ==
 
-"@react-navigation/bottom-tabs@^5.2.5":
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.2.5.tgz#d434dbf99bd963005d13d05eec3558ae12b9f1af"
-  integrity sha512-LTix/ToVcHoqlCAeusIyNzuhhkWHqKnqhuH4fpB6WeWwg2BiCGa6FVq+Gq/RiZijIF8CcAll/0NIFUfllB/oGw==
+"@react-navigation/bottom-tabs@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.2.6.tgz#587220a78fdb71c643f2bf1de3d1b9aca669bd37"
+  integrity sha512-I79rIHncqq44ayIYWJt86CSjwxVPXVJpWPZv9BaKi9oLrz9OVl5gG15IjSErWXFNPkP/XTrJSi/MdQnFlD0TzA==
   dependencies:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
@@ -4490,6 +4490,13 @@ react-native-paper@^3.6.0:
   dependencies:
     "@callstack/react-theme-provider" "^3.0.5"
     color "^3.1.2"
+    react-native-safe-area-view "^0.14.6"
+
+react-native-popover-view@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-popover-view/-/react-native-popover-view-2.0.7.tgz#f740403e18719df833eeaf47d1b942704270c6b6"
+  integrity sha512-1GMFvueNE1xhi0zzCAYptWIkIWiPVdN8EwYRSL5kyug/VFwmdowZYWq4LekFQlFCj9WHLrHe7awCgTXUC/4E6Q==
+  dependencies:
     react-native-safe-area-view "^0.14.6"
 
 react-native-ratings@^6.3.0:
