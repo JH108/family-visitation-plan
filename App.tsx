@@ -1,57 +1,25 @@
-import React from "react";
-import "react-native-gesture-handler";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
-import { StyleSheet } from 'react-native';
+import React from 'react';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
 
-import { ThemeProvider } from "react-native-elements";
-import { Provider } from "react-redux";
+import { ThemeProvider } from 'react-native-elements';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider } from 'react-redux';
 
-import store from "./src/redux-modules/store";
+import Navigator from './src/Navigator';
 
-import Profile from './src/screens/Profile';
-import Home from "./src/screens/Home";
-import DeaconsList from "./src/screens/DeaconsList";
-import FamiliesList from "./src/screens/FamiliesList";
-import VisitationList from "./src/screens/VisitationList";
-import ProfileButton from "./src/components/ProfileButton";
-
-const styles = StyleSheet.create({
-  ProfileButtonTitle: {
-    display: "none"
-  },
-  ProfileButton: {
-    height: 10,
-  }
-});
-
-const Stack = createStackNavigator();
+import store from './src/redux-modules/store';
 
 export default function App() {
-  return (
-    <ThemeProvider>
-      <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Home"
-
-          >
-            <Stack.Screen name="Profile" component={Profile} />
-            <Stack.Screen
-              name="ProfileButton"
-              component={ProfileButton}
-              options={{
-                headerTransparent: true,
-                headerTitleStyle: styles.ProfileButtonTitle,
-              }}
-            />
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Deacons List" component={DeaconsList} />
-            <Stack.Screen name="Families List" component={FamiliesList} />
-            <Stack.Screen name="Visitation List" component={VisitationList} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Provider>
-    </ThemeProvider>
-  );
+	return (
+		<PaperProvider>
+			<ThemeProvider>
+				<Provider store={store}>
+					<NavigationContainer>
+						<Navigator />
+					</NavigationContainer>
+				</Provider>
+			</ThemeProvider>
+		</PaperProvider>
+	);
 }
