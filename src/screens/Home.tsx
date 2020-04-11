@@ -1,23 +1,28 @@
 import React from 'react';
-import { Text, SafeAreaView, View, StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeFooter from '../components/HomeFooter/HomeFooter';
+import DeaconsList from './DeaconsList';
+import FamiliesList from './FamiliesList';
+import VisitationList from './VisitationList';
 
-const styles = StyleSheet.create({
-	full: {
-		height: '100%',
-		minHeight: '100%',
-		flex: 1,
-	},
-});
+const Tab = createBottomTabNavigator();
 
-const Home = ({ navigation }) => {
+const Home = ({}) => {
 	return (
-		<SafeAreaView style={styles.full}>
-			<View style={styles.full}>
-				<Text>Home</Text>
-				<HomeFooter navigation={navigation} />
-			</View>
-		</SafeAreaView>
+		<Tab.Navigator
+			initialRouteName="Deacons List"
+			tabBar={({ navigation, state, descriptors }) => (
+				<HomeFooter
+					navigation={navigation}
+					state={state}
+					descriptors={descriptors}
+				/>
+			)}
+		>
+			<Tab.Screen name="Deacons List" component={DeaconsList} />
+			<Tab.Screen name="Families List" component={FamiliesList} />
+			<Tab.Screen name="Visitation List" component={VisitationList} />
+		</Tab.Navigator>
 	);
 };
 
