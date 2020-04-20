@@ -68,6 +68,8 @@ const HomeFooter = ({ navigation, state, descriptors }) => {
 						accessibilityStates={isFocused ? ['selected'] : []}
 						accessibilityLabel={options.tabBarAccessibilityLabel}
 						testID={options.tabBarTestID}
+						key={options.tabBarTestID}
+						size={36}
 					/>
 				);
 			})}
