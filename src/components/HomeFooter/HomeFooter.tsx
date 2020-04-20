@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Appbar } from 'react-native-paper';
+import { Appbar, useTheme } from 'react-native-paper';
 
 const styles = StyleSheet.create({
 	bottom: {
@@ -12,23 +12,67 @@ const styles = StyleSheet.create({
 	},
 });
 
-const Home = ({ navigation }) => {
+const getIcon = (route) => {
+	switch (route) {
+		case 'Visitation List':
+			return 'chart-timeline';
+		case 'Deacons List':
+			return 'account-details';
+		case 'Families List':
+			return 'account-group';
+		default:
+			return '';
+	}
+};
+
+const HomeFooter = ({ navigation, state, descriptors }) => {
+	const theme = useTheme();
+
 	return (
 		<Appbar style={styles.bottom}>
-			<Appbar.Action
-				icon="chart-timeline"
-				onPress={() => navigation.push('Visitation List')}
-			/>
-			<Appbar.Action
-				icon="account-details"
-				onPress={() => navigation.push('Deacons List')}
-			/>
-			<Appbar.Action
-				icon="account-group"
-				onPress={() => navigation.push('Families List')}
-			/>
+			{state.routes.map((route, index) => {
+				const { options } = descriptors[route.key];
+				const isFocused = state.index === index;
+
+				const onPress = () => {
+					const event = navigation.emit({
+						type: 'tabPress',
+						target: route.key,
+						canPreventDefault: true,
+					});
+
+					if (!isFocused && !event.defaultPrevented) {
+						navigation.navigate(route.name);
+					}
+				};
+
+				const onLongPress = () => {
+					navigation.emit({
+						type: 'tabLongPress',
+						target: route.key,
+					});
+				};
+
+				const icon = getIcon(route.name);
+				const color = isFocused
+					? theme.colors.accent
+					: theme.colors.onBackground;
+
+				return (
+					<Appbar.Action
+						icon={icon}
+						color={color}
+						onPress={onPress}
+						onLongPress={onLongPress}
+						accessibilityRole="button"
+						accessibilityStates={isFocused ? ['selected'] : []}
+						accessibilityLabel={options.tabBarAccessibilityLabel}
+						testID={options.tabBarTestID}
+					/>
+				);
+			})}
 		</Appbar>
 	);
 };
 
-export default Home;
+export default HomeFooter;
