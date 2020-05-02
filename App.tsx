@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { ThemeProvider } from 'react-native-elements';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider, Portal } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -20,7 +20,9 @@ export default function App() {
 					<Provider store={store}>
 						<PersistGate loading={null} persistor={persistor}>
 							<NavigationContainer>
-								<Navigator />
+								<Portal.Host>
+									<Navigator />
+								</Portal.Host>
 							</NavigationContainer>
 						</PersistGate>
 					</Provider>
