@@ -1,16 +1,18 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import HomeFooter from '../components/HomeFooter/HomeFooter';
 import DeaconsList from './DeaconsList';
 import FamiliesList from './FamiliesList';
 import VisitationList from './VisitationList';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 const Home = ({}) => {
 	return (
 		<Tab.Navigator
 			initialRouteName="Deacons List"
+			tabBarPosition={'bottom'}
+			backBehavior={'history'}
 			tabBar={({ navigation, state, descriptors }) => (
 				<HomeFooter
 					navigation={navigation}
