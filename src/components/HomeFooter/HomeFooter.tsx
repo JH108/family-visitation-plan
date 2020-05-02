@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Appbar, useTheme } from 'react-native-paper';
+import { useSafeArea } from 'react-native-safe-area-context';
+
 
 const styles = StyleSheet.create({
 	bottom: {
@@ -27,9 +29,10 @@ const getIcon = (route) => {
 
 const HomeFooter = ({ navigation, state, descriptors }) => {
 	const theme = useTheme();
+	const insets = useSafeArea();
 
 	return (
-		<Appbar style={styles.bottom}>
+		<Appbar style={{ ...styles.bottom, paddingBottom: insets.bottom, height: 100 }}>
 			{state.routes.map((route, index) => {
 				const { options } = descriptors[route.key];
 				const isFocused = state.index === index;
@@ -68,6 +71,8 @@ const HomeFooter = ({ navigation, state, descriptors }) => {
 						accessibilityStates={isFocused ? ['selected'] : []}
 						accessibilityLabel={options.tabBarAccessibilityLabel}
 						testID={options.tabBarTestID}
+						key={options.tabBarTestID + `${index}`}
+						size={36}
 					/>
 				);
 			})}

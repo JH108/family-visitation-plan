@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
 
 const DeaconsList = ({ navigation }) => {
 	const deacons: Deacons = useSelector((state) => state.deaconsSlice);
-	console.log(deacons);
 
 	return (
 		<SafeAreaView>

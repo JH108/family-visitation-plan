@@ -16,7 +16,6 @@ const ProfileButton = ({ navigation }) => {
 
 	return (
 		<View style={styles.centeredContainer}>
-			{/* Photo by Joshua Fuller on Unsplash */}
 			<Avatar
 				size="small"
 				rounded
