@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { Appbar, useTheme } from 'react-native-paper';
 import { useSafeArea } from 'react-native-safe-area-context';
 
-
 const styles = StyleSheet.create({
 	bottom: {
 		justifyContent: 'space-evenly',
@@ -32,7 +31,14 @@ const HomeFooter = ({ navigation, state, descriptors }) => {
 	const insets = useSafeArea();
 
 	return (
-		<Appbar style={{ ...styles.bottom, paddingBottom: insets.bottom, height: 100 }}>
+		<Appbar
+			style={{
+				...styles.bottom,
+				paddingBottom: insets.bottom,
+				height: 80,
+				backgroundColor: theme.colors.backdrop,
+			}}
+		>
 			{state.routes.map((route, index) => {
 				const { options } = descriptors[route.key];
 				const isFocused = state.index === index;
@@ -58,7 +64,7 @@ const HomeFooter = ({ navigation, state, descriptors }) => {
 
 				const icon = getIcon(route.name);
 				const color = isFocused
-					? theme.colors.accent
+					? theme.colors.primary
 					: theme.colors.onBackground;
 
 				return (
