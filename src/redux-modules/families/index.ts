@@ -1,12 +1,6 @@
 import reduxToolkit, { AnyAction } from '@reduxjs/toolkit';
 
-export interface Family {
-  id: string;
-  familyName: string;
-  homePhone: string;
-  deacon: string;
-  members: Array<string>;
-}
+import { Family } from '../../typescript/Family';
 
 export type Families = Array<Family>;
 
@@ -18,33 +12,20 @@ export const familiesSlice: reduxToolkit.Slice<Families> = reduxToolkit.createSl
   name: 'families',
   initialState: [
     {
-      id: '123',
+      id: '126',
+      deaconId: '127',
       familyName: 'Hudson',
-      homePhone: '1234567890',
-      deacon: 'Brain',
-      members: ['John', 'Jill']
-    },
-    {
-      id: '456',
-      familyName: 'White',
-      homePhone: '1234567890',
-      deacon: 'Ron',
-      members: ['John', 'Jill']
-    },
-    {
-      id: '453',
-      familyName: 'Wight',
-      homePhone: '1234567890',
-      deacon: 'Jesse',
-      members: ['John', 'Jill']
-    },
-    {
-      id: '452',
-      familyName: 'Weight',
-      homePhone: '1234567890',
-      deacon: 'Mark',
-      members: ['John', 'Jill']
-    },
+      homePhone: '1212211212',
+      members: [{
+        id: '111',
+        firstName: '112',
+        lastName: 'Hudson',
+        memberStatus: 'Member',
+        staffType: 'Member',
+        birthday: new Date(),
+        phoneNumber: '1234556789',
+      }],
+    }
   ],
   reducers: {
     addFamily(state, action) {
