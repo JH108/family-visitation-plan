@@ -1,25 +1,37 @@
-import reduxToolkit from '@reduxjs/toolkit';
+import { AsyncStorage } from 'react-native';
+import reduxToolkit, { combineReducers } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+import { persistStore, persistReducer } from 'redux-persist';
 import { deaconsSlice } from './deacons';
 import { counterSagas } from './deacons/sagas';
 import { familiesSlice } from './families';
 import { familySagas } from './families/sagas';
 
+const version = 1;
+
+const persistConfig = {
+	key: 'root',
+	version,
+	storage: AsyncStorage,
+};
+
+const sagas = [...counterSagas, ...familySagas];
 const sagaMiddleware = createSagaMiddleware();
 
-const store = reduxToolkit.configureStore({
-	reducer: {
-		deaconsSlice: deaconsSlice.reducer,
-		familiesSlice: familiesSlice.reducer
-	},
+const reducer = combineReducers({
+	deaconsSlice: deaconsSlice.reducer,
+	familiesSlice: familiesSlice.reducer,
+});
+
+export type IState = ReturnType<typeof reducer>;
+
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+export const store = reduxToolkit.configureStore({
+	reducer: persistedReducer,
 	middleware: [sagaMiddleware],
 });
 
-const sagas = [
-	...counterSagas,
-	...familySagas,
-];
-
 sagas.forEach(sagaMiddleware.run);
 
-export default store;
+export const persistor = persistStore(store);
