@@ -23,34 +23,6 @@ const FamiliesList = ({ navigation }) => {
   return (
     <SafeAreaView>
       <Text>Families List</Text>
-      <Button onPress={() => {
-        setVisible(!visible);
-        return (
-          <Modal
-            visible={visible}
-            children={
-              <Form
-                onDismiss={() => ''}
-                fields={
-                  Object.keys(families).map((family) => {
-                    console.log(family);
-                    return {
-                      name: 'asdf',
-                      label: '',
-                      type: FieldTypes.INPUT,
-                      required: false
-                    };
-                  })
-                }
-                formName="New Family"
-                onSubmit={(e) => {
-
-                }
-                }></Form>
-            }
-          ></Modal>
-        );
-      }}>Add Family</Button>
       <ScrollView contentContainerStyle={styles.centeredContainer}>
         {families.map((family: Family) => {
           return (
@@ -64,6 +36,83 @@ const FamiliesList = ({ navigation }) => {
           );
         })}
       </ScrollView>
+      <Button onPress={() => {
+        navigation.navigate('Modal', {
+          fields: [
+            {
+              type: FieldTypes.INPUT,
+              label: 'First Name',
+              name: 'firstName',
+              required: true,
+            },
+            {
+              type: FieldTypes.INPUT,
+              label: 'Last Name',
+              name: 'lastName',
+              required: true,
+            },
+            {
+              type: FieldTypes.INPUT,
+              label: 'Member Status',
+              name: 'memberStatus',
+              required: true,
+            },
+            {
+              type: FieldTypes.INPUT,
+              label: 'Phone Number',
+              name: 'phoneNumber',
+            },
+            {
+              type: FieldTypes.INPUT,
+              label: 'Staff Type',
+              name: 'staffType',
+            },
+            {
+              type: FieldTypes.INPUT,
+              label: 'Birthday',
+              name: 'birthday',
+            },
+          ],
+          formName: "People",
+          onSubmit(values) {
+            console.log(values);
+          }
+        });
+      }}>Add Person</Button>
+      <Button onPress={() => {
+        navigation.navigate('Modal', {
+          fields: [
+            {
+              type: FieldTypes.INPUT,
+              label: 'Family Name',
+              name: 'familyName',
+              required: true,
+            },
+            {
+              type: FieldTypes.INPUT,
+              label: 'Home Phone',
+              name: 'homePhone',
+              required: true,
+            },
+            {
+              type: FieldTypes.DROPDOWN,
+              label: 'Members',
+              name: 'members',
+              required: true,
+            },
+            {
+              type: FieldTypes.DROPDOWN,
+              label: 'Deacon',
+              name: 'deacon',
+              required: true,
+            },
+          ],
+          formName: "Family",
+          onSubmit(values) {
+            console.log(values);
+          }
+        });
+      }}>Add Family</Button>
     </SafeAreaView>
   );
 };
