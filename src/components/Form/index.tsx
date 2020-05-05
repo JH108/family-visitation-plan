@@ -58,16 +58,14 @@ const styles = StyleSheet.create({
 
 const formReducer = (
 	state: Values,
-	action: PayloadAction<{ key: string; value: any }>,
+	action: PayloadAction<{ key: string; value: any; }>,
 ) => {
 	const newState = { ...state };
-
 	switch (action.type) {
 		case 'UPDATE':
 			newState[action?.payload?.key] = action?.payload?.value;
 			break;
 	}
-
 	return newState;
 };
 
@@ -78,7 +76,10 @@ const Form: FunctionComponent<FormProps> = ({
 	onDismiss,
 }) => {
 	const theme = useTheme();
-	const initialState = fields.map((field) => ({ [field.name]: null }));
+	const initialState = fields.reduce((acc, curr) => {
+		acc[curr.name] = '';
+		return acc;
+	}, {});
 	const [values, dispatch] = useReducer(formReducer, initialState);
 	const width = Dimensions.get('window').width;
 	const submit = () => {
@@ -117,18 +118,20 @@ const Form: FunctionComponent<FormProps> = ({
 								mode={'outlined'}
 								label={field.label}
 								value={fieldValue}
-								onChangeText={(text) =>
+								onChangeText={(text) => {
 									dispatch({
 										payload: { key: field.name, value: text },
 										type: 'UPDATE',
-									})
-								}
+									});
+								}}
 							/>
-							{field.required && !fieldValue && (
-								<HelperText style={{ color: theme.colors.error }}>
-									This field is required!
-								</HelperText>
-							)}
+							{
+								field.required && !fieldValue && (
+									<HelperText style={{ color: theme.colors.error }}>
+										This field is required!
+									</HelperText>
+								)
+							}
 						</View>
 					);
 				})}
