@@ -3,12 +3,13 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { ThemeProvider } from 'react-native-elements';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider, Portal } from 'react-native-paper';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import Navigator from './src/Navigator';
 
-import store from './src/redux-modules/store';
+import { store, persistor } from './src/redux-modules/store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
@@ -17,9 +18,13 @@ export default function App() {
 			<ThemeProvider>
 				<SafeAreaProvider>
 					<Provider store={store}>
-						<NavigationContainer>
-							<Navigator />
-						</NavigationContainer>
+						<PersistGate loading={null} persistor={persistor}>
+							<NavigationContainer>
+								<Portal.Host>
+									<Navigator />
+								</Portal.Host>
+							</NavigationContainer>
+						</PersistGate>
 					</Provider>
 				</SafeAreaProvider>
 			</ThemeProvider>
