@@ -1,4 +1,4 @@
-import reduxToolkit, { AnyAction } from '@reduxjs/toolkit';
+import { AnyAction, createSlice, Slice } from '@reduxjs/toolkit';
 import { v4 as uuid } from 'uuid';
 
 export interface DeaconAttributes {
@@ -77,7 +77,7 @@ const initialState = [
 	}),
 ];
 
-export const deaconsSlice: reduxToolkit.Slice<Deacons> = reduxToolkit.createSlice(
+export const deaconsSlice: Slice<Deacons> = createSlice(
 	{
 		name: 'deacons',
 		initialState,

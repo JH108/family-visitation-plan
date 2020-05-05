@@ -1,9 +1,9 @@
-import reduxToolkit, { AnyAction } from '@reduxjs/toolkit';
+import { AnyAction, Slice, createSlice } from '@reduxjs/toolkit';
 import { Person } from '../../typescript/Person';
 
 export type People = Array<Person>;
 
-export const peopleSlice: reduxToolkit.Slice<People> = reduxToolkit.createSlice({
+export const peopleSlice: Slice<People> = createSlice({
   name: 'people',
   initialState: [
     {

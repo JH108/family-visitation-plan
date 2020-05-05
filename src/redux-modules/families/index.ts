@@ -1,4 +1,4 @@
-import reduxToolkit, { AnyAction } from '@reduxjs/toolkit';
+import { AnyAction, Slice, createSlice } from '@reduxjs/toolkit';
 
 import { Family } from '../../typescript/Family';
 
@@ -8,7 +8,7 @@ export interface FamilyReducers {
   addFamily: (state: Families, action: AnyAction) => Families;
 }
 
-export const familiesSlice: reduxToolkit.Slice<Families> = reduxToolkit.createSlice({
+export const familiesSlice: Slice<Families> = createSlice({
   name: 'families',
   initialState: [
     {
