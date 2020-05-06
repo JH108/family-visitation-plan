@@ -2,7 +2,8 @@ import React from 'react';
 import { Text, SafeAreaView, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { BasicCard } from '../components/Cards';
-import { Families, Family } from '../redux-modules/families';
+import { Families } from '../redux-modules/families';
+import { Family } from '../typescript/Family';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
