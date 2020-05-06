@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from 'react-redux';
-import { Modal, IconButton, useTheme, Title } from 'react-native-paper';
+import { IconButton, useTheme, Title } from 'react-native-paper';
 import { BasicCard } from '../components/Cards';
 import { Deacons, deaconsSlice } from '../redux-modules/deacons';
-import Form, { FieldTypes } from '../components/Form';
+import { FieldTypes } from '../components/Form';
+import { Person } from '../typescript/Person';
+import { People } from '../redux-modules/people';
 
 const styles = StyleSheet.create({
 	container: {
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
 const DeaconsList = ({ navigation }) => {
 	const theme = useTheme();
 	const deacons: Deacons = useSelector((state) => state.deaconsSlice);
+	const people: People = useSelector((state) => state.peopleSlice);
 	const dispatch = useDispatch();
 
 	return (
@@ -44,13 +47,19 @@ const DeaconsList = ({ navigation }) => {
 				contentContainerStyle={styles.centeredContainer}
 			>
 				{deacons.map((deacon) => {
+					const person: Person = people.reduce((acc, curr) => {
+						if (curr.id === deacon.personId) {
+							return curr;
+						}
+						return acc;
+					});
 					return (
 						<BasicCard
 							key={deacon.id}
-							title={deacon.firstName}
-							subtitle={deacon.lastName}
+							title={person.firstName}
+							subtitle={person.lastName}
 							families={deacon.families}
-							phoneNumber={deacon.phoneNumber}
+							phoneNumber={person.phoneNumber}
 						/>
 					);
 				})}
@@ -64,30 +73,18 @@ const DeaconsList = ({ navigation }) => {
 					navigation.navigate('Modal', {
 						fields: [
 							{
-								type: FieldTypes.INPUT,
-								label: 'First Name',
-								name: 'firstName',
-								required: true,
-							},
-							{
-								type: FieldTypes.INPUT,
-								label: 'Last Name',
-								name: 'lastName',
-								required: true,
-							},
-							{
-								type: FieldTypes.INPUT,
-								label: 'Phone Number',
-								name: 'phoneNumber',
-								required: true,
-							},
-							{ type: FieldTypes.INPUT, label: 'Families', name: 'families' },
-							{
-								type: FieldTypes.INPUT,
+								type: FieldTypes.DROPDOWN,
 								label: 'Family',
 								name: 'family',
-								required: true,
+								// required: true,
 							},
+							{
+								type: FieldTypes.DROPDOWN,
+								label: 'Person',
+								name: 'person',
+								// required: true,
+							},
+							{ type: FieldTypes.INPUT, label: 'Families', name: 'families' },
 							{ type: FieldTypes.INPUT, label: 'Visits', name: 'visits' },
 						],
 						formName: 'Deacon',

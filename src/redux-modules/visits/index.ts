@@ -1,11 +1,11 @@
-import reduxToolkit, { AnyAction } from '@reduxjs/toolkit';
+import { AnyAction, Slice, createSlice } from '@reduxjs/toolkit';
 
 import { Visit } from '../../typescript/Visit';
 
 export type Visits = Array<Visit>;
 
 
-export const visitsSlice: reduxToolkit.Slice<Visits> = reduxToolkit.createSlice({
+export const visitsSlice: Slice<Visits> = createSlice({
   name: 'families',
   initialState: [
     {

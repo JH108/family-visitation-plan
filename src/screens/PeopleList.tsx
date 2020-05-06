@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, SafeAreaView, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { peopleSlice } from '../redux-modules/people/index';
 import { BasicCard } from '../components/Cards';
-import { familiesSlice, Families } from '../redux-modules/families';
-import { Family } from '../typescript/Family';
+import { People } from '../redux-modules/people';
+import { Person } from '../typescript/Person';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 import { FieldTypes } from '../components/Form/index';
-import { Deacons } from '../redux-modules/deacons';
 
 const styles = StyleSheet.create({
   centeredContainer: {
@@ -18,21 +18,19 @@ const styles = StyleSheet.create({
 });
 
 const FamiliesList = ({ navigation }) => {
-  const families: Families = useSelector((state) => state.familiesSlice);
-  const deacons: Deacons = useSelector((state) => state.deaconsSlice);
+  const people: People = useSelector((state) => state.peopleSlice);
   const dispatch = useDispatch();
   return (
     <SafeAreaView>
-      <Text>Families List</Text>
+      <Text>People List</Text>
       <ScrollView contentContainerStyle={styles.centeredContainer}>
-        {families.map((family: Family) => {
-          // Find deacon by id and pass the name
+        {people.map((person: Person) => {
           return (
             <BasicCard
-              key={family.id}
-              title={family.familyName}
-              subtitle={family.familyName}
-              phoneNumber={family.homePhone}
+              key={person.id}
+              title={person.firstName}
+              subtitle={person.lastName}
+              phoneNumber={person.phoneNumber}
               families={[]}
             />
           );
@@ -43,35 +41,45 @@ const FamiliesList = ({ navigation }) => {
           fields: [
             {
               type: FieldTypes.INPUT,
-              label: 'Family Name',
-              name: 'familyName',
+              label: 'First Name',
+              name: 'firstName',
               required: true,
             },
             {
               type: FieldTypes.INPUT,
-              label: 'Home Phone',
-              name: 'homePhone',
+              label: 'Last Name',
+              name: 'lastName',
               required: true,
             },
             {
-              type: FieldTypes.DROPDOWN,
-              label: 'Members',
-              name: 'members',
-              // required: true,
+              type: FieldTypes.INPUT,
+              label: 'Member Status',
+              name: 'memberStatus',
+              required: true,
             },
             {
-              type: FieldTypes.DROPDOWN,
-              label: 'Deacon',
-              name: 'deacon',
-              // required: true,
+              type: FieldTypes.INPUT,
+              label: 'Phone Number',
+              name: 'phoneNumber',
+            },
+            {
+              type: FieldTypes.INPUT,
+              label: 'Staff Type',
+              name: 'staffType',
+            },
+            {
+              type: FieldTypes.INPUT,
+              label: 'Birthday',
+              name: 'birthday',
             },
           ],
-          formName: "Family",
+          formName: "People",
           onSubmit(values) {
-            dispatch(familiesSlice.actions.add(values));
+            dispatch(peopleSlice.actions.add(values));
+            // console.log(values);
           }
         });
-      }}>Add Family</Button>
+      }}>Add Person</Button>
     </SafeAreaView>
   );
 };

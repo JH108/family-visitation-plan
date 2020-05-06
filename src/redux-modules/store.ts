@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native';
-import reduxToolkit, { combineReducers } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { persistStore, persistReducer } from 'redux-persist';
 import { deaconsSlice } from './deacons';
@@ -29,17 +29,17 @@ const sagas = [
 const sagaMiddleware = createSagaMiddleware();
 
 const reducer = combineReducers({
-		deaconsSlice: deaconsSlice.reducer,
-		familiesSlice: familiesSlice.reducer,
-		peopleSlice: peopleSlice.reducer,
-		visitsSlice: visitsSlice.reducer,
+	deaconsSlice: deaconsSlice.reducer,
+	familiesSlice: familiesSlice.reducer,
+	peopleSlice: peopleSlice.reducer,
+	visitsSlice: visitsSlice.reducer,
 });
 
 export type IState = ReturnType<typeof reducer>;
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 
-export const store = reduxToolkit.configureStore({
+export const store = configureStore({
 	reducer: persistedReducer,
 	middleware: [sagaMiddleware],
 });
