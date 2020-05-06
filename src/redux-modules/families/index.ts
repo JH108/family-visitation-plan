@@ -1,6 +1,7 @@
 import { AnyAction, Slice, createSlice } from '@reduxjs/toolkit';
 
 import { Family } from '../../typescript/Family';
+import { v4 as uuid } from 'uuid';
 
 export type Families = Array<Family>;
 
@@ -28,9 +29,14 @@ export const familiesSlice: Slice<Families> = createSlice({
     }
   ],
   reducers: {
-    addFamily(state, action) {
-      state.push(action.payload);
-      return state;
-    }
+    add(draft, action) {
+      draft.push({ id: uuid(), ...action.payload });
+    },
+    remove(draft, action) {
+      const id = action.payload.id;
+      const removeIndex = draft.findIndex((deacon) => deacon.id === id);
+
+      draft.splice(removeIndex, 1);
+    },
   }
 });
