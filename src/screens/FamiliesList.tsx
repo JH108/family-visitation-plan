@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, SafeAreaView, StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { BasicCard } from '../components/Cards';
-import { Families } from '../redux-modules/families';
+import { familiesSlice, Families } from '../redux-modules/families';
 import { Family } from '../typescript/Family';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Modal, Button } from 'react-native-paper';
-import Form from '../components/Form';
+import { Button } from 'react-native-paper';
 import { FieldTypes } from '../components/Form/index';
 
 const styles = StyleSheet.create({
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
 
 const FamiliesList = ({ navigation }) => {
   const families: Families = useSelector((state) => state.familiesSlice);
-  const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
   return (
     <SafeAreaView>
       <Text>Families List</Text>
@@ -41,49 +40,6 @@ const FamiliesList = ({ navigation }) => {
           fields: [
             {
               type: FieldTypes.INPUT,
-              label: 'First Name',
-              name: 'firstName',
-              required: true,
-            },
-            {
-              type: FieldTypes.INPUT,
-              label: 'Last Name',
-              name: 'lastName',
-              required: true,
-            },
-            {
-              type: FieldTypes.INPUT,
-              label: 'Member Status',
-              name: 'memberStatus',
-              required: true,
-            },
-            {
-              type: FieldTypes.INPUT,
-              label: 'Phone Number',
-              name: 'phoneNumber',
-            },
-            {
-              type: FieldTypes.INPUT,
-              label: 'Staff Type',
-              name: 'staffType',
-            },
-            {
-              type: FieldTypes.INPUT,
-              label: 'Birthday',
-              name: 'birthday',
-            },
-          ],
-          formName: "People",
-          onSubmit(values) {
-            console.log(values);
-          }
-        });
-      }}>Add Person</Button>
-      <Button onPress={() => {
-        navigation.navigate('Modal', {
-          fields: [
-            {
-              type: FieldTypes.INPUT,
               label: 'Family Name',
               name: 'familyName',
               required: true,
@@ -98,18 +54,18 @@ const FamiliesList = ({ navigation }) => {
               type: FieldTypes.DROPDOWN,
               label: 'Members',
               name: 'members',
-              required: true,
+              // required: true,
             },
             {
               type: FieldTypes.DROPDOWN,
               label: 'Deacon',
               name: 'deacon',
-              required: true,
+              // required: true,
             },
           ],
           formName: "Family",
           onSubmit(values) {
-            console.log(values);
+            dispatch(familiesSlice.actions.add(values));
           }
         });
       }}>Add Family</Button>
