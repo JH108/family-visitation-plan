@@ -72,6 +72,7 @@ const FamiliesList = ({ navigation }) => {
           }
         });
       }}>Add Family</Button>
+      <Button onPress={() => { navigation.navigate('Family Member Selection'); }}>Add Family Members</Button>
     </SafeAreaView>
   );
 };
