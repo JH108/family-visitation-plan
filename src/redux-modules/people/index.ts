@@ -9,7 +9,7 @@ export const peopleSlice: Slice<People> = createSlice({
   initialState: [
     {
       id: '111',
-      firstName: '112',
+      firstName: 'Arnold',
       lastName: 'Hudson',
       memberStatus: 'Member',
       staffType: 'Member',
