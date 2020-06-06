@@ -31,7 +31,7 @@ const FamiliesList = ({ navigation }) => {
               title={person.firstName}
               subtitle={person.lastName}
               phoneNumber={person.phoneNumber}
-              families={[]}
+              list={[]}
               onPress={() => { }}
             />
           );
