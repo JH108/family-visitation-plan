@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Text, TextInput } from 'react-native-paper';
 import { Icon } from 'react-native-elements';
@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { People } from '../redux-modules/people';
 import { Person } from '../typescript/Person';
 import { useCustomTheme } from '../../App';
+import { WIDTH } from '../globals';
 
 const styles = StyleSheet.create({
   person: {
@@ -15,7 +16,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
-    width: Dimensions.get("screen").width
+    justifyContent: "space-between",
+    width: WIDTH,
   }
 });
 
@@ -32,7 +34,7 @@ const SearchableMultiSelect = () => {
         selected.map((selectedPerson) => {
 
           return (
-            <Text key={selectedPerson}>{selectedPerson}</Text>
+            <Text style={{ fontSize: theme.fontSizes.small }} key={selectedPerson}>{selectedPerson}</Text>
           );
         })
       }
