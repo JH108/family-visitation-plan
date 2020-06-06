@@ -32,6 +32,7 @@ const FamiliesList = ({ navigation }) => {
               subtitle={person.lastName}
               phoneNumber={person.phoneNumber}
               families={[]}
+              onPress={() => { }}
             />
           );
         })}
@@ -68,7 +69,7 @@ const FamiliesList = ({ navigation }) => {
               name: 'staffType',
             },
             {
-              type: FieldTypes.INPUT,
+              type: FieldTypes.DATE,
               label: 'Birthday',
               name: 'birthday',
             },
@@ -76,7 +77,6 @@ const FamiliesList = ({ navigation }) => {
           formName: "People",
           onSubmit(values) {
             dispatch(peopleSlice.actions.add(values));
-            // console.log(values);
           }
         });
       }}>Add Person</Button>
