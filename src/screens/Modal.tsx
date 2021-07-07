@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme, Title, IconButton } from 'react-native-paper';
+import { WIDTH } from '../globals';
 import Form from '../components/Form';
 
 const styles = StyleSheet.create({
@@ -17,8 +18,7 @@ const styles = StyleSheet.create({
 
 const ModalScreen = ({ navigation, route }) => {
 	const onDismiss = () => navigation.goBack();
-	const theme = useTheme();
-	const width = Dimensions.get('window').width;
+	const theme = useTheme();;
 	const params = route.params;
 
 	return (
@@ -26,7 +26,7 @@ const ModalScreen = ({ navigation, route }) => {
 			style={{
 				...styles.container,
 				backgroundColor: theme.colors.backdrop,
-				width,
+				width: WIDTH,
 			}}
 		>
 			<View style={styles.header}>

@@ -21,6 +21,8 @@ const getIcon = (route) => {
 			return 'account-details';
 		case 'Families List':
 			return 'account-group';
+		case 'People List':
+			return 'account';
 		default:
 			return '';
 	}

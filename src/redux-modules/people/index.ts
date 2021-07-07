@@ -1,14 +1,15 @@
-import reduxToolkit, { AnyAction } from '@reduxjs/toolkit';
+import { AnyAction, Slice, createSlice } from '@reduxjs/toolkit';
 import { Person } from '../../typescript/Person';
+import { v4 as uuid } from 'uuid';
 
 export type People = Array<Person>;
 
-export const peopleSlice: reduxToolkit.Slice<People> = reduxToolkit.createSlice({
+export const peopleSlice: Slice<People> = createSlice({
   name: 'people',
   initialState: [
     {
       id: '111',
-      firstName: '112',
+      firstName: 'Arnold',
       lastName: 'Hudson',
       memberStatus: 'Member',
       staffType: 'Member',
@@ -17,8 +18,15 @@ export const peopleSlice: reduxToolkit.Slice<People> = reduxToolkit.createSlice(
     }
   ],
   reducers: {
-    addPerson(state, action) {
-      return state;
-    }
+    add(draft: People, action: AnyAction) {
+      draft.push({ id: uuid(), ...action.payload });
+      return draft;
+    },
+    remove(draft, action) {
+      const id = action.payload.id;
+      const removeIndex = draft.findIndex((person) => person.id === id);
+
+      draft.splice(removeIndex, 1);
+    },
   }
 });

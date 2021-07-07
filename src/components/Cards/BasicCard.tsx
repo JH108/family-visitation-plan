@@ -6,8 +6,9 @@ import { WIDTH } from '../../globals';
 export interface BasicCardProps {
 	title: string;
 	subtitle?: string;
-	families: Array<string>;
+	list: Array<string>;
 	phoneNumber: string;
+	onPress?(): void;
 }
 
 const styles = StyleSheet.create({
@@ -20,8 +21,9 @@ const styles = StyleSheet.create({
 const BasicCard: FunctionComponent<BasicCardProps> = ({
 	title,
 	subtitle,
-	families,
+	list,
 	phoneNumber,
+	onPress = (() => { }),
 }) => {
 	return (
 		<Card style={styles.card}>
@@ -34,7 +36,7 @@ const BasicCard: FunctionComponent<BasicCardProps> = ({
 						{...props}
 						icon="more"
 						onPress={() => {
-							console.log(title, subtitle, families, phoneNumber);
+							onPress();
 						}}
 					/>
 				)}

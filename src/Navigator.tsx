@@ -4,6 +4,7 @@ import { useTheme } from 'react-native-paper';
 import Profile from './screens/Profile';
 import Home from './screens/Home';
 import ModalScreen from './screens/Modal';
+import SearchableMultiSelect from './screens/SearchableMultiSelect';
 
 const MainStack = createStackNavigator();
 const RootStack = createStackNavigator();
@@ -41,6 +42,11 @@ const Navigator = () => {
 			<RootStack.Screen
 				name="Modal"
 				component={ModalScreen}
+				options={{ headerShown: false }}
+			/>
+			<RootStack.Screen
+				name="Family Member Selection"
+				component={SearchableMultiSelect}
 				options={{ headerShown: false }}
 			/>
 		</RootStack.Navigator>
